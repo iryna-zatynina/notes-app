@@ -1,12 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import './NoteItem.scss';
+import AppContext from "../../context/AppContext";
 
 const NoteItem = () => {
-    const [date, setDate] = useState(new Date())
-
-    useEffect(() => {
-        setDate(new Date())
-    }, [])
+    const {date} = useContext(AppContext)
 
     return (
         <div className="noteItem">
