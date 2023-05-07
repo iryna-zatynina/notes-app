@@ -1,0 +1,19 @@
+@import "../../style/globals";
+
+.noteItem {
+  border-bottom: 1px solid $grey;
+  padding: 20px 30px;
+
+  h3 {
+    margin-bottom: 5px;
+  }
+
+  .additional {
+    margin-left: 15px;
+    color: grey;
+  }
+
+  &:hover {
+    background: $light-grey;
+  }
+}

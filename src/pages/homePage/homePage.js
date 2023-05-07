@@ -1,10 +1,13 @@
 import React from 'react';
 import Header from "../../components/Header/Header";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import './homePage.scss';
 
 const HomePage = () => {
     return (
-        <div>
-            <Header />
+        <div className="homePage">
+            <Header className="header"/>
+            <Sidebar />
         </div>
     );
 };
