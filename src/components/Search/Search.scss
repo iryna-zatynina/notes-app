@@ -1,0 +1,19 @@
+@import "../../style/globals";
+
+.search {
+  input {
+    height: 28px;
+    width: 300px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px #b4b4b4;
+    background-color: $light-grey;
+    padding: 0px 10px;
+
+    &::placeholder {
+      background: url("search.svg") 38% no-repeat;
+      text-align: center;
+
+    }
+  }
+}

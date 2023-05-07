@@ -1,5 +1,7 @@
+@import "../../style/globals";
+
 .header {
-  background: #dedddd;
+  background: $grey;
   display: grid;
   grid-template-columns: auto auto auto 1fr;
   gap: 10px;
@@ -11,11 +13,16 @@
     border: none;
     border-radius: 5px;
     box-shadow: 1px 1px 1px #b4b4b4;
+    background-color: $light-grey;
+
     &:hover {
       background: white;
     }
   }
 
+  .search {
+    justify-self: right;
+  }
 
 }
 
