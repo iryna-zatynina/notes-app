@@ -7,13 +7,16 @@ import Search from "../Search/Search";
 import AppContext from "../../context/AppContext";
 
 const Header = () => {
-    const { handleAddData} = useContext(AppContext);
+    const { handleAddNewNote} = useContext(AppContext);
 
 
 
 return (
         <div className="header">
-            <button onClick={handleAddData}>
+            <button onClick={handleAddNewNote}>
+                <AddIcon />
+            </button>
+            <button>
                 <AddIcon />
             </button>
             <button><DeleteIcon /></button>

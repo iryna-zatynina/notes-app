@@ -51,4 +51,22 @@ export const addData = (storeName, data)  => {
     });
 };
 
+export const getStoreData = (storeName) => {
+    return new Promise((resolve) => {
+        request = indexedDB.open('NotesDB');
+
+        request.onsuccess = () => {
+            db = request.result;
+            const tx = db.transaction(storeName, 'readonly');
+            const store = tx.objectStore(storeName);
+            const res = store.getAll();
+            res.onsuccess = () => {
+                resolve(res.result);
+            };
+        };
+    });
+};
+
+
+
 

@@ -5,4 +5,13 @@
   border: 1px solid $grey;
   border-bottom: none;
   border-top: none;
+
+  .empty {
+    font-size: 30px;
+    color: $grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
 }
