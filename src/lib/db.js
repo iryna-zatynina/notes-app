@@ -61,12 +61,32 @@ export const getStoreData = (storeName) => {
             const store = tx.objectStore(storeName);
             const res = store.getAll();
             res.onsuccess = () => {
-                resolve(res.result);
+                resolve(res.result.sort((a, b) => a.date > b.date ? -1 : 1));
             };
         };
     });
 };
 
+export const updateData = (storeName, key, data) => {
+    return new Promise((resolve) => {
+        request = indexedDB.open('NotesDB', version);
 
+        request.onsuccess = () => {
+            if (db) {
+                db = request.result;
+                const tx = db.transaction(storeName, 'readwrite');
+                const store = tx.objectStore(storeName);
+                const res = store.get(key);
+                res.onsuccess = () => {
+                    const newData = { ...res.result, ...data };
+                    store.put(newData);
+                    resolve(newData);
+                };
+                res.onerror = () => {
+                    resolve(null);
+                }
+            }
 
-
+        };
+    });
+};

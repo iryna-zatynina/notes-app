@@ -1,20 +1,41 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import './homePage.scss';
 import WorkSpace from "../../components/WorkSpace/WorkSpace";
 import AppContext from "../../context/AppContext";
 import nextId from "react-id-generator";
-import {addData, initDB, getStoreData} from "../../lib/db";
+import {addData, initDB, getStoreData, updateData} from "../../lib/db";
 
 const HomePage = () => {
     const [textareaValue, setTextareaValue] = useState('');
     const [date, setDate] = useState(new Date());
     const [notes, setNotes] = useState('');
+    const [isTextareaActive, setIsTextareaActive] = useState(true)
+    const [currentNoteId, setCurrentNoteId] = useState('')
+    const [currentNote, setCurrentNote] = useState('')
 
 
     useEffect(() => {
         setDate(new Date())
+
+        const handleUpdateNote = async () => {
+            try {
+                if (currentNote.note !== textareaValue) {
+                    const note = await updateData("notesStore", currentNoteId, {
+                        note: textareaValue,
+                        date: new Date(),
+                        id: currentNoteId
+                    });
+                    setCurrentNote(note)
+                    await handleGetNotes();
+                }
+            } catch (err) {
+                throw err;
+            }
+        }
+        handleUpdateNote()
+
     }, [textareaValue])
 
 
@@ -22,14 +43,16 @@ const HomePage = () => {
         await initDB();
         const notes = await getStoreData("notesStore");
         setNotes(notes);
-        console.log(notes)
+
     };
 
-    const showNote = (id) => {
+    const showWholeNote = (id) => {
         notes.forEach((n) => {
             if (n.id === id) {
                 setTextareaValue(n.note)
                 setDate(n.date)
+                setCurrentNoteId(n.id)
+                setCurrentNote(n)
             }
         })
     };
@@ -37,35 +60,34 @@ const HomePage = () => {
     const id = nextId();
 
     const handleAddNewNote = async () => {
+        setIsTextareaActive(true);
+        setCurrentNoteId(id);
+        setTextareaValue("");
         try {
-            await addData("notesStore", { note: "", date: date, id: id });
+            const note = await addData("notesStore", { note: "", date: new Date() , id: id });
+            setCurrentNote(note)
             await handleGetNotes();
         } catch (err) {
             throw err;
         }
     };
-
-
-    const handleUpdateNote = async () => {
-        try {
-            await addData("notesStore", { note: "", date: date, id: id });
-            await handleGetNotes();
-        } catch (err) {
-            throw err;
-        }
-    }
 
     const handleGetNotes = async () => {
         const notes = await getStoreData("notesStore");
         setNotes(notes);
     };
 
+
     return (
-        <AppContext.Provider value={{textareaValue, setTextareaValue, date, setDate,  handleAddNewNote, showNote}}>
+        <AppContext.Provider
+            value={{textareaValue, setTextareaValue,
+                date, setDate, handleAddNewNote, showNote: showWholeNote,
+                setIsTextareaActive, currentNoteId, currentNote}}
+        >
             <div className="homePage">
                 <Header className="header"/>
                 <Sidebar notes={notes}/>
-                <WorkSpace />
+                <WorkSpace isTextareaActive={isTextareaActive}/>
             </div>
         </AppContext.Provider>
     );

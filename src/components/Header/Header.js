@@ -7,20 +7,22 @@ import Search from "../Search/Search";
 import AppContext from "../../context/AppContext";
 
 const Header = () => {
-    const { handleAddNewNote} = useContext(AppContext);
+    const { handleAddNewNote, setIsTextareaActive, handleUpdateNote, currentNote} = useContext(AppContext);
 
 
+    console.log(currentNote.note)
 
 return (
         <div className="header">
-            <button onClick={handleAddNewNote}>
+            <button
+                className={currentNote.note === "" ? 'disabled' :  ''}
+                onClick={handleAddNewNote}
+                disabled={currentNote.note === ""}
+            >
                 <AddIcon />
             </button>
-            <button>
-                <AddIcon />
-            </button>
-            <button><DeleteIcon /></button>
-            <button><EditIcon /></button>
+            <button onClick={handleUpdateNote}><DeleteIcon /></button>
+            <button onClick={() => setIsTextareaActive(true)}><EditIcon /></button>
             <Search className="search" />
         </div>
     );
