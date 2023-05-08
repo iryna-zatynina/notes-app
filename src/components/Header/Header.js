@@ -1,14 +1,21 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import './Header.scss';
 import {ReactComponent as AddIcon} from './add.svg';
 import {ReactComponent as DeleteIcon} from './delete.svg';
 import {ReactComponent as EditIcon} from './edit.svg';
 import Search from "../Search/Search";
+import AppContext from "../../context/AppContext";
 
 const Header = () => {
-    return (
+    const { handleAddData} = useContext(AppContext);
+
+
+
+return (
         <div className="header">
-            <button><AddIcon /></button>
+            <button onClick={handleAddData}>
+                <AddIcon />
+            </button>
             <button><DeleteIcon /></button>
             <button><EditIcon /></button>
             <Search className="search" />
