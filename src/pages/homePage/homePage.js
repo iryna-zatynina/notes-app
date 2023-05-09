@@ -9,9 +9,10 @@ import nextId from "react-id-generator";
 import {addData, initDB, getStoreData, updateData, deleteData} from "../../lib/db";
 
 const HomePage = () => {
+    const [notes, setNotes] = useState('');
+    const [sortedNotes, setSortedNotes] = useState('')
     const [textareaValue, setTextareaValue] = useState('');
     const [date, setDate] = useState(new Date());
-    const [notes, setNotes] = useState('');
     const [currentNoteId, setCurrentNoteId] = useState('')
     const [currentNote, setCurrentNote] = useState('')
     const [modalShow, setModalShow] = useState(true);
@@ -25,11 +26,12 @@ const HomePage = () => {
     window.onload = async () => {
         await initDB();
         const notes = await getStoreData("notesStore");
+        setSortedNotes(notes);
         setNotes(notes);
-
     };
 
     const showWholeNote = (id) => {
+        console.log("showWholeNote")
         notes.forEach((n) => {
             if (n.id === id) {
                 setTextareaValue(n.note)
@@ -43,7 +45,6 @@ const HomePage = () => {
     const handleAddNewNote = async () => {
         setCurrentNoteId(id);
         setTextareaValue("");
-        console.log("new note")
         try {
             const note = await addData("notesStore", { note: "", date: new Date() , id: id });
             setCurrentNote(note)
@@ -55,7 +56,7 @@ const HomePage = () => {
 
     const handleGetNotes = async () => {
         const notes = await getStoreData("notesStore");
-        setNotes(notes);
+        setSortedNotes(notes);
     };
 
     const handleUpdateNote = async () => {
@@ -78,23 +79,40 @@ const HomePage = () => {
         try {
             await deleteData("notesStore", currentNoteId);
             await handleGetNotes();
-            setTextareaValue('');
+            setTextareaValue('')
         } catch (err) {
             throw Error
         }
     };
 
 
+    const [searchValue, setSearchValue] = useState();
+
+    const searchNote = (term) => {
+        if (term.length === 0) {
+            setSortedNotes(notes);
+        }
+
+        const filteredNotes = notes.filter(item => {
+            return item.note.indexOf(term) !== -1
+        })
+        setSortedNotes(filteredNotes)
+    }
+
+
+
+
     return (
         <AppContext.Provider
             value={{textareaValue, setTextareaValue,
                 date, notes, setDate, handleAddNewNote, showNote: showWholeNote,
-                currentNoteId, currentNote, handleDeleteNote, handleGetNotes, handleUpdateNote}}
+                currentNoteId, currentNote, handleDeleteNote, handleGetNotes,
+                handleUpdateNote, searchNote, searchValue, setSearchValue}}
         >
             <div>
                 <div className="homePage">
                     <Header className="header"/>
-                    <Sidebar notes={notes}/>
+                    <Sidebar notes={sortedNotes}/>
                     <WorkSpace />
                 </div>
                 <ModalComponent show={modalShow}

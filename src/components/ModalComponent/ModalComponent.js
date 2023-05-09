@@ -4,11 +4,9 @@ import {useContext} from "react";
 import AppContext from "../../context/AppContext";
 
 export default function ModalComponent(props) {
-    const { handleGetNotes} = useContext(AppContext);
 
     const onClickHandler = () => {
         props.onHide();
-
     }
     return (
         <Modal
