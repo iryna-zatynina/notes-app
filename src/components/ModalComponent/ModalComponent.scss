@@ -1,0 +1,23 @@
+@import "../../style/globals";
+
+.modalComponent {
+  .body {
+    text-align: center;
+    padding: 30px;
+
+    button {
+      height: 50px;
+      width: 150px;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 1px 1px 1px #b4b4b4;
+      background-color: $yellow;
+      cursor: pointer;
+      margin-top: 20px;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+}

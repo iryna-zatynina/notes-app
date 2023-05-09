@@ -3,6 +3,7 @@ import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import './homePage.scss';
 import WorkSpace from "../../components/WorkSpace/WorkSpace";
+import ModalComponent from "../../components/ModalComponent/ModalComponent";
 import AppContext from "../../context/AppContext";
 import nextId from "react-id-generator";
 import {addData, initDB, getStoreData, updateData, deleteData} from "../../lib/db";
@@ -13,6 +14,7 @@ const HomePage = () => {
     const [notes, setNotes] = useState('');
     const [currentNoteId, setCurrentNoteId] = useState('')
     const [currentNote, setCurrentNote] = useState('')
+    const [modalShow, setModalShow] = useState(true);
     const id = nextId();
 
     useEffect( () => {
@@ -95,7 +97,8 @@ const HomePage = () => {
                     <Sidebar notes={notes}/>
                     <WorkSpace />
                 </div>
-
+                <ModalComponent show={modalShow}
+                                onHide={() => setModalShow(false)}/>
             </div>
         </AppContext.Provider>
     );

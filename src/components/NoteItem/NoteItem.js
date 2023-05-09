@@ -28,7 +28,6 @@ const NoteItem = ({note}) => {
             <div className={'noteItem' + (currentNoteId === note.id ? ' active' : '')} onClick={onNoteItemClick}>
                 <h3>{noteTitle}</h3>
                 <span>{note.date.toLocaleTimeString()}</span>
-                <span className="additional">No additional text</span>
             </div>
             <hr />
         </>
