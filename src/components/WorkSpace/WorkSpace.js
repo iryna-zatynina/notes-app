@@ -3,7 +3,7 @@ import './WorkSpace.scss';
 import AppContext from "../../context/AppContext";
 
 const WorkSpace = forwardRef((props, ref) => {
-    const {date, textareaValue, setTextareaValue, isTextareaDisable, handleUpdateNote} = useContext(AppContext);
+    const {textareaValue, setTextareaValue, date, isTextareaDisable, handleUpdateNote} = useContext(AppContext);
 
     const onChange = (e) => {
         setTextareaValue(e.target.value)

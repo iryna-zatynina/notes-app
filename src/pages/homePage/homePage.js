@@ -106,11 +106,11 @@ const HomePage = () => {
                 date, notes, setDate, handleAddNewNote, showNote: showWholeNote,
                 currentNoteId, currentNote, handleDeleteNote, handleGetNotes,
                 handleUpdateNote, searchNote, searchValue, setSearchValue,
-                isTextareaDisable, setIsTextareaDisable}}
+                isTextareaDisable, setIsTextareaDisable, sortedNotes, textareaRef}}
         >
             <div>
                 <div className="homePage">
-                    <Header textareaRef={textareaRef} className="header"/>
+                    <Header className="header"/>
                     <Sidebar notes={sortedNotes}/>
                     <WorkSpace ref={textareaRef}/>
                 </div>

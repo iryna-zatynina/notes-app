@@ -6,8 +6,8 @@ import {ReactComponent as EditIcon} from './edit.svg';
 import Search from "../Search/Search";
 import AppContext from "../../context/AppContext";
 
-const Header = ({textareaRef}) => {
-    const { handleAddNewNote, currentNote, handleDeleteNote, notes, setIsTextareaDisable} = useContext(AppContext);
+const Header = () => {
+    const { handleAddNewNote, currentNote, handleDeleteNote, sortedNotes, setIsTextareaDisable, textareaRef} = useContext(AppContext);
 
 
     const onClick = () => {
@@ -25,13 +25,13 @@ return (
             </button>
             <button
                 onClick={handleDeleteNote}
-                disabled={notes.length === 0}
+                disabled={sortedNotes.length === 0}
             >
                 <DeleteIcon />
             </button>
             <button
                 onClick={onClick}
-                disabled={notes.length === 0}
+                disabled={sortedNotes.length === 0}
             >
                 <EditIcon />
             </button>
