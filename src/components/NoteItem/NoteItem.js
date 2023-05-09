@@ -3,7 +3,7 @@ import './NoteItem.scss';
 import AppContext from "../../context/AppContext";
 
 const NoteItem = ({note}) => {
-    const {showNote, currentNoteId} = useContext(AppContext);
+    const {showNote, currentNoteId, setIsTextareaDisable} = useContext(AppContext);
     const [noteTitle, setNoteTitle] = useState('');
 
     useEffect(() => {
@@ -11,7 +11,9 @@ const NoteItem = ({note}) => {
     }, [note.note])
 
     const onNoteItemClick = () => {
-        showNote(note.id)
+        showNote(note.id);
+        setIsTextareaDisable(false);
+
     }
 
     function editNoteTitle() {

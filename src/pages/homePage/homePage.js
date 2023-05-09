@@ -16,7 +16,10 @@ const HomePage = () => {
     const [currentNoteId, setCurrentNoteId] = useState('')
     const [currentNote, setCurrentNote] = useState('')
     const [modalShow, setModalShow] = useState(true);
+    const [isTextareaDisable, setIsTextareaDisable] = useState(false)
+    const [searchValue, setSearchValue] = useState();
     const id = nextId();
+    const textareaRef = useRef();
 
     useEffect( () => {
         setDate(new Date())
@@ -31,8 +34,7 @@ const HomePage = () => {
     };
 
     const showWholeNote = (id) => {
-        console.log("showWholeNote")
-        notes.forEach((n) => {
+        sortedNotes.forEach((n) => {
             if (n.id === id) {
                 setTextareaValue(n.note)
                 setDate(n.date)
@@ -43,6 +45,7 @@ const HomePage = () => {
     };
 
     const handleAddNewNote = async () => {
+        setIsTextareaDisable(false);
         setCurrentNoteId(id);
         setTextareaValue("");
         try {
@@ -59,11 +62,11 @@ const HomePage = () => {
         setSortedNotes(notes);
     };
 
-    const handleUpdateNote = async () => {
+    const handleUpdateNote = async (value) => {
         try {
-            if (currentNote.note !== textareaValue) {
+            if (currentNote.note !== value) {
                 const note = await updateData("notesStore", currentNoteId, {
-                    note: textareaValue,
+                    note: value,
                     date: new Date(),
                     id: currentNoteId
                 });
@@ -85,9 +88,6 @@ const HomePage = () => {
         }
     };
 
-
-    const [searchValue, setSearchValue] = useState();
-
     const searchNote = (term) => {
         if (term.length === 0) {
             setSortedNotes(notes);
@@ -100,20 +100,19 @@ const HomePage = () => {
     }
 
 
-
-
     return (
         <AppContext.Provider
             value={{textareaValue, setTextareaValue,
                 date, notes, setDate, handleAddNewNote, showNote: showWholeNote,
                 currentNoteId, currentNote, handleDeleteNote, handleGetNotes,
-                handleUpdateNote, searchNote, searchValue, setSearchValue}}
+                handleUpdateNote, searchNote, searchValue, setSearchValue,
+                isTextareaDisable, setIsTextareaDisable}}
         >
             <div>
                 <div className="homePage">
-                    <Header className="header"/>
+                    <Header textareaRef={textareaRef} className="header"/>
                     <Sidebar notes={sortedNotes}/>
-                    <WorkSpace />
+                    <WorkSpace ref={textareaRef}/>
                 </div>
                 <ModalComponent show={modalShow}
                                 onHide={() => setModalShow(false)}/>

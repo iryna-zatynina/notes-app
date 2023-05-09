@@ -60,7 +60,6 @@ export const getStoreData = (storeName) => {
             const store = tx.objectStore(storeName);
             const res = store.getAll();
             res.onsuccess = () => {
-                console.log("getStoreData")
                 resolve(res.result.sort((a, b) => a.date > b.date ? -1 : 1));
             };
         };
@@ -100,7 +99,6 @@ export const deleteData = (storeName, key) => {
             const store = tx.objectStore(storeName);
             const res = store.delete(key);
             res.onsuccess = () => {
-                console.log("deleteData")
                 resolve(true);
             };
             res.onerror = () => {

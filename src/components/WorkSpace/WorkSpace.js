@@ -1,9 +1,14 @@
-import React, { useContext} from 'react';
+import React, {forwardRef, useContext} from 'react';
 import './WorkSpace.scss';
 import AppContext from "../../context/AppContext";
 
-const WorkSpace = () => {
-    const {date, textareaValue, setTextareaValue} = useContext(AppContext);
+const WorkSpace = forwardRef((props, ref) => {
+    const {date, textareaValue, setTextareaValue, isTextareaDisable, handleUpdateNote} = useContext(AppContext);
+
+    const onChange = (e) => {
+        setTextareaValue(e.target.value)
+        handleUpdateNote(e.target.value);
+    }
 
     return (
         <div className="workSpace">
@@ -13,11 +18,13 @@ const WorkSpace = () => {
                     autoFocus
                     className="textarea"
                     value={textareaValue}
-                    onChange={(e) => setTextareaValue(e.target.value)}
+                    onChange={onChange}
+                    disabled={isTextareaDisable}
+                    ref={ref}
                 >
             </textarea>
         </div>
     );
-};
+});
 
 export default WorkSpace;

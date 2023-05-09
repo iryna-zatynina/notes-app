@@ -6,9 +6,14 @@ import {ReactComponent as EditIcon} from './edit.svg';
 import Search from "../Search/Search";
 import AppContext from "../../context/AppContext";
 
-const Header = () => {
-    const { handleAddNewNote, currentNote, handleDeleteNote, notes, handleUpdateNote} = useContext(AppContext);
+const Header = ({textareaRef}) => {
+    const { handleAddNewNote, currentNote, handleDeleteNote, notes, setIsTextareaDisable} = useContext(AppContext);
 
+
+    const onClick = () => {
+        setIsTextareaDisable(false)
+        textareaRef.current?.focus();
+    }
 
 return (
         <div className="header">
@@ -25,10 +30,10 @@ return (
                 <DeleteIcon />
             </button>
             <button
-                onClick={handleUpdateNote}
+                onClick={onClick}
                 disabled={notes.length === 0}
             >
-                <EditIcon /> save note
+                <EditIcon />
             </button>
             <Search className="search" />
         </div>
