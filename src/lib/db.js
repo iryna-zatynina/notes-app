@@ -86,7 +86,25 @@ export const updateData = (storeName, key, data) => {
                     resolve(null);
                 }
             }
+        };
+    });
+};
 
+export const deleteData = (storeName, key) => {
+    return new Promise((resolve) => {
+        request = indexedDB.open('NotesDB', version);
+
+        request.onsuccess = () => {
+            db = request.result;
+            const tx = db.transaction(storeName, 'readwrite');
+            const store = tx.objectStore(storeName);
+            const res = store.delete(key);
+            res.onsuccess = () => {
+                resolve(true);
+            };
+            res.onerror = () => {
+                resolve(false);
+            }
         };
     });
 };

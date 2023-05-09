@@ -16,16 +16,16 @@
     background-color: $light-grey;
     cursor: pointer;
 
+    &:disabled {
+      background-color: $grey;
+      cursor: unset;
+      &:hover {
+        background-color: $grey;
+      }
+
+    }
     &:hover {
       background: white;
-    }
-  }
-
-  .disabled {
-    background-color: $grey;
-    &:hover {
-      cursor: unset;
-      background-color: $grey;
     }
   }
 

@@ -19,10 +19,16 @@
   &:hover {
     background: $light-grey;
   }
+  &:active {
+    background: $yellow;
+  }
 }
 
 .active {
   background-color: $yellow;
+  &:hover {
+    background-color: $yellow;
+  }
 }
 
 hr {
