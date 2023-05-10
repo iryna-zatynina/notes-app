@@ -15,7 +15,7 @@ const HomePage = () => {
     const [date, setDate] = useState(new Date());
     const [currentNoteId, setCurrentNoteId] = useState('')
     const [currentNote, setCurrentNote] = useState('')
-    const [modalShow, setModalShow] = useState(true);
+    const [modalShow, setModalShow] = useState(false);
     const [isTextareaDisable, setIsTextareaDisable] = useState(false)
     const [searchValue, setSearchValue] = useState();
     const id = nextId();
@@ -102,7 +102,7 @@ const HomePage = () => {
 
     return (
         <AppContext.Provider
-            value={{textareaValue, setTextareaValue,
+            value={{textareaValue, setTextareaValue, setModalShow,
                 date, notes, setDate, handleAddNewNote, showNote: showWholeNote,
                 currentNoteId, currentNote, handleDeleteNote, handleGetNotes,
                 handleUpdateNote, searchNote, searchValue, setSearchValue,

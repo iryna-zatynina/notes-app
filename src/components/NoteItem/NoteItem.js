@@ -19,7 +19,7 @@ const NoteItem = ({note}) => {
     function editNoteTitle() {
         if (note.note) {
             if (note.note.length > 20) {
-                setNoteTitle(note.note.slice(0, 20) + "...")
+                setNoteTitle(note.note.slice(0, 15) + "...")
             } else setNoteTitle(note.note)
         } else setNoteTitle("New Note")
     }
@@ -28,7 +28,7 @@ const NoteItem = ({note}) => {
     return (
         <>
             <div className={'noteItem' + (currentNoteId === note.id ? ' active' : '')} onClick={onNoteItemClick}>
-                <h3>{noteTitle}</h3>
+                <h4>{noteTitle}</h4>
                 <span>{note.date.toLocaleTimeString()}</span>
             </div>
             <hr />

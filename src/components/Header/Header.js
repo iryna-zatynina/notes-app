@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import './Header.scss';
 import {ReactComponent as AddIcon} from './add.svg';
 import {ReactComponent as DeleteIcon} from './delete.svg';
@@ -7,7 +7,7 @@ import Search from "../Search/Search";
 import AppContext from "../../context/AppContext";
 
 const Header = () => {
-    const { handleAddNewNote, currentNote, handleDeleteNote, sortedNotes, setIsTextareaDisable, textareaRef} = useContext(AppContext);
+    const { handleAddNewNote, currentNote, sortedNotes, setIsTextareaDisable, textareaRef, setModalShow} = useContext(AppContext);
 
 
     const onClick = () => {
@@ -24,7 +24,7 @@ return (
                 <AddIcon />
             </button>
             <button
-                onClick={handleDeleteNote}
+                onClick={() => setModalShow(true)}
                 disabled={sortedNotes.length === 0}
             >
                 <DeleteIcon />

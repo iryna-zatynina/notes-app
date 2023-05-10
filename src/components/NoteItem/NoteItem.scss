@@ -36,3 +36,12 @@ hr {
   border-top: 1px solid $grey;
   margin: 0 20px;
 }
+
+@media  screen and (max-width: 576px) {
+  .noteItem {
+    padding: 10px;
+    h4 {
+      font-size: 14px;
+    }
+  }
+}

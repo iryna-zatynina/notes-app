@@ -16,3 +16,14 @@
     }
   }
 }
+
+@media  screen and (max-width: 576px) {
+  .search {
+    input {
+      width: 150px;
+      &::placeholder {
+        background-position: 18%;
+      }
+    }
+  }
+}

@@ -29,3 +29,17 @@
     }
   }
 }
+
+@media  screen and (max-width: 576px) {
+  .workSpace {
+    margin-right: 5px;
+
+    .date {
+      top: 5px;
+      font-size: 14px;
+    }
+    .textarea {
+      padding: 30px 15px 15px 15px;
+    }
+  }
+}

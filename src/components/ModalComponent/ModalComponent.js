@@ -4,21 +4,24 @@ import {useContext} from "react";
 import AppContext from "../../context/AppContext";
 
 export default function ModalComponent(props) {
+    const {handleDeleteNote} = useContext(AppContext);
 
     const onClickHandler = () => {
         props.onHide();
+        handleDeleteNote();
     }
+
     return (
         <Modal
             {...props}
-            size="lg"
+            size="sm"
             aria-labelledby="contained-modal-title-vcenter"
             centered
             className="modalComponent"
         >
             <Modal.Body className="body">
-                <h1>Welcome to Notes</h1>
-                <button onClick={onClickHandler}>GET STARTED</button>
+                <h1>Delete?</h1>
+                <button onClick={onClickHandler}>Yes</button>
             </Modal.Body>
         </Modal>
     );
