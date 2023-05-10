@@ -18,6 +18,7 @@ const HomePage = () => {
     const [modalShow, setModalShow] = useState(false);
     const [isTextareaDisable, setIsTextareaDisable] = useState(false)
     const [searchValue, setSearchValue] = useState();
+    const [isSidebarOpened, setIsSidebarOpened] =useState(false);
     const id = nextId();
     const textareaRef = useRef();
 
@@ -106,7 +107,8 @@ const HomePage = () => {
                 date, notes, setDate, handleAddNewNote, showNote: showWholeNote,
                 currentNoteId, currentNote, handleDeleteNote, handleGetNotes,
                 handleUpdateNote, searchNote, searchValue, setSearchValue,
-                isTextareaDisable, setIsTextareaDisable, sortedNotes, textareaRef}}
+                isTextareaDisable, setIsTextareaDisable, sortedNotes, textareaRef,
+                isSidebarOpened, setIsSidebarOpened}}
         >
             <div>
                 <div className="homePage">

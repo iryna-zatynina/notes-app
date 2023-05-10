@@ -29,14 +29,26 @@
     }
   }
 
+  .arrow {
+    display: none;
+  }
+
   .search {
     justify-self: right;
   }
 }
 
-@media  screen and (max-width: 500px) {
+@media  screen and (max-width: 576px) {
   .header {
+    grid-template-columns: auto auto auto auto 1fr;
     padding: 5px;
+    .arrow {
+      display: block;
+      .turn {
+        transform: rotate(180deg);
+      }
+    }
   }
+
 }
 

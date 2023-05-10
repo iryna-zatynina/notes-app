@@ -3,20 +3,27 @@ import './Header.scss';
 import {ReactComponent as AddIcon} from './add.svg';
 import {ReactComponent as DeleteIcon} from './delete.svg';
 import {ReactComponent as EditIcon} from './edit.svg';
+import {ReactComponent as Arrow} from './arrow.svg';
 import Search from "../Search/Search";
 import AppContext from "../../context/AppContext";
 
 const Header = () => {
-    const { handleAddNewNote, currentNote, sortedNotes, setIsTextareaDisable, textareaRef, setModalShow} = useContext(AppContext);
+    const { handleAddNewNote, currentNote, sortedNotes, setIsTextareaDisable, textareaRef, setModalShow, setIsSidebarOpened, isSidebarOpened} = useContext(AppContext);
 
 
-    const onClick = () => {
+    const onEditClick = () => {
         setIsTextareaDisable(false)
         textareaRef.current?.focus();
     }
 
 return (
         <div className="header">
+            <button
+                className="arrow"
+                onClick={() => setIsSidebarOpened(!isSidebarOpened)}
+            >
+                <Arrow className={isSidebarOpened ? "turn" : ""}/>
+            </button>
             <button
                 onClick={handleAddNewNote}
                 disabled={currentNote.note === ''}
@@ -30,7 +37,7 @@ return (
                 <DeleteIcon />
             </button>
             <button
-                onClick={onClick}
+                onClick={onEditClick}
                 disabled={sortedNotes.length === 0}
             >
                 <EditIcon />
