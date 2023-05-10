@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import './homePage.scss';
+import './HomePage.scss';
 import WorkSpace from "../../components/WorkSpace/WorkSpace";
 import ModalComponent from "../../components/ModalComponent/ModalComponent";
 import AppContext from "../../context/AppContext";
@@ -18,11 +18,11 @@ const HomePage = () => {
     const [modalShow, setModalShow] = useState(false);
     const [isTextareaDisable, setIsTextareaDisable] = useState(false)
     const [searchValue, setSearchValue] = useState();
-    const [isSidebarOpened, setIsSidebarOpened] =useState(false);
+    const [isSidebarOpened, setIsSidebarOpened] = useState(false);
     const id = nextId();
     const textareaRef = useRef();
 
-    useEffect( () => {
+    useEffect(() => {
         setDate(new Date())
     }, [textareaValue])
 
@@ -35,12 +35,12 @@ const HomePage = () => {
     };
 
     const showWholeNote = (id) => {
-        sortedNotes.forEach((n) => {
-            if (n.id === id) {
-                setTextareaValue(n.note)
-                setDate(n.date)
-                setCurrentNoteId(n.id)
-                setCurrentNote(n)
+        sortedNotes.forEach((note) => {
+            if (note.id === id) {
+                setTextareaValue(note.note)
+                setDate(note.date)
+                setCurrentNoteId(note.id)
+                setCurrentNote(note)
             }
         })
     };
@@ -50,7 +50,7 @@ const HomePage = () => {
         setCurrentNoteId(id);
         setTextareaValue("");
         try {
-            const note = await addData("notesStore", { note: "", date: new Date() , id: id });
+            const note = await addData("notesStore", {note: "", date: new Date(), id: id});
             setCurrentNote(note)
             await handleGetNotes();
         } catch (err) {
@@ -71,7 +71,7 @@ const HomePage = () => {
                     date: new Date(),
                     id: currentNoteId
                 });
-                setCurrentNote(note)
+                setCurrentNote(note);
                 await handleGetNotes();
             }
         } catch (err) {
@@ -103,12 +103,14 @@ const HomePage = () => {
 
     return (
         <AppContext.Provider
-            value={{textareaValue, setTextareaValue, setModalShow,
+            value={{
+                textareaValue, setTextareaValue, setModalShow,
                 date, notes, setDate, handleAddNewNote, showNote: showWholeNote,
                 currentNoteId, currentNote, handleDeleteNote, handleGetNotes,
                 handleUpdateNote, searchNote, searchValue, setSearchValue,
                 isTextareaDisable, setIsTextareaDisable, sortedNotes, textareaRef,
-                isSidebarOpened, setIsSidebarOpened}}
+                isSidebarOpened, setIsSidebarOpened
+            }}
         >
             <div>
                 <div className="homePage">

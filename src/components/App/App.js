@@ -1,12 +1,12 @@
 import './App.scss';
-import HomePage from "../../pages/homePage/homePage";
+import HomePage from "../../pages/homePage/HomePage";
 
 function App() {
-  return (
-    <div className="App">
-      <HomePage />
-    </div>
-  );
+    return (
+        <div>
+            <HomePage/>
+        </div>
+    );
 }
 
 export default App;

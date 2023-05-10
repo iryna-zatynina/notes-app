@@ -7,21 +7,20 @@ const WorkSpace = forwardRef((props, ref) => {
 
     const onChange = (e) => {
         setTextareaValue(e.target.value)
-        handleUpdateNote(e.target.value);
+        handleUpdateNote(e.target.value)
     }
 
     return (
         <div className="workSpace">
             <p className="date">{date.toDateString()} {date.toLocaleTimeString()}</p>
-
-                <textarea
-                    autoFocus
-                    className="textarea"
-                    value={textareaValue}
-                    onChange={onChange}
-                    disabled={isTextareaDisable}
-                    ref={ref}
-                >
+            <textarea
+                autoFocus
+                className="textarea"
+                value={textareaValue}
+                onChange={onChange}
+                disabled={isTextareaDisable}
+                ref={ref}
+            >
             </textarea>
         </div>
     );

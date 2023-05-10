@@ -6,12 +6,10 @@ const Search = () => {
     const {searchNote} = useContext(AppContext);
     const [searchValue, setSearchValue] = useState('');
 
-    function onSearchChange(e)  {
+    function onSearchChange(e) {
         setSearchValue(e.target.value)
         searchNote(e.target.value);
     }
-
-
 
     return (
         <div className="search">

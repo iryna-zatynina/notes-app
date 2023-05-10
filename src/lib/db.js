@@ -10,7 +10,7 @@ export const initDB = () => {
             db = request.result;
 
             if (!db.objectStoreNames.contains('notesStore')) {
-                db.createObjectStore('notesStore', { keyPath: 'id' });
+                db.createObjectStore('notesStore', {keyPath: 'id'});
             }
         };
 
@@ -27,7 +27,7 @@ export const initDB = () => {
     });
 };
 
-export const addData = (storeName, data)  => {
+export const addData = (storeName, data) => {
     return new Promise((resolve) => {
         request = indexedDB.open('NotesDB', version);
 
@@ -70,21 +70,20 @@ export const updateData = (storeName, key, data) => {
     return new Promise((resolve) => {
         request = indexedDB.open('NotesDB', version);
 
-        request.onsuccess = () => {
-            if (db) {
+        request.onsuccess = (e) => {
                 db = request.result;
                 const tx = db.transaction(storeName, 'readwrite');
                 const store = tx.objectStore(storeName);
                 const res = store.get(key);
                 res.onsuccess = () => {
-                    const newData = { ...res.result, ...data };
+                    const newData = {...res.result, ...data};
                     store.put(newData);
                     resolve(newData);
                 };
                 res.onerror = () => {
                     resolve(null);
                 }
-            }
+
         };
     });
 };

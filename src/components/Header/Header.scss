@@ -19,11 +19,12 @@
     &:disabled {
       background-color: $grey;
       cursor: unset;
+
       &:hover {
         background-color: $grey;
       }
-
     }
+
     &:hover {
       background: white;
     }
@@ -38,17 +39,18 @@
   }
 }
 
-@media  screen and (max-width: 576px) {
+@media screen and (max-width: 576px) {
   .header {
     grid-template-columns: auto auto auto auto 1fr;
     padding: 5px;
+
     .arrow {
       display: block;
+
       .turn {
         transform: rotate(180deg);
       }
     }
   }
-
 }
 

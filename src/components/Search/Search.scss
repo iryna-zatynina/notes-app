@@ -11,16 +11,17 @@
     padding: 0px 10px;
 
     &::placeholder {
-      background: url("search.svg") 36% no-repeat;
+      background: url("../../../src/icons/search.svg") 36% no-repeat;
       text-align: center;
     }
   }
 }
 
-@media  screen and (max-width: 576px) {
+@media screen and (max-width: 576px) {
   .search {
     input {
       width: 150px;
+
       &::placeholder {
         background-position: 18%;
       }

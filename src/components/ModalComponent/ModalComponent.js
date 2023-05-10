@@ -23,7 +23,6 @@ export default function ModalComponent(props) {
                 <h1>Delete?</h1>
                 <button onClick={onClickHandler}>Yes</button>
             </Modal.Body>
-        </Modal>
-    );
+        </Modal>);
 }
 
